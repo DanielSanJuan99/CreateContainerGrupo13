@@ -7,6 +7,7 @@ variables:
   VM_IP_PUBLICA: '20.38.32.84'
   IMAGE_NAME: 'myapp-nginx-g13'
   ACR_NAME: 'containerRegGrupo13'
+  ACR_NAME_LC: 'containerreggroup13'
   ACR_USERNAME: 'containerRegGrupo13'
   ACR_PASSWORD: 'LQ+Io6/VnP2uIb3E3vr1zQv9i/O4jGUqt74+gFBiOs+ACRDrCIsU'
 
@@ -64,10 +65,10 @@ stages:
                 - script: |
                     # Autenticarse en Azure Container Registry utilizando nombre de usuario y contraseña
                     echo "Autenticándose en Azure Container Registry y ejecutando la imagen Docker..."
-                    echo ${ACR_PASSWORD} | sudo docker login ${ACR_NAME}.azurecr.io -u ${ACR_USERNAME} --password-stdin > /dev/null 2>&1
+                    echo ${ACR_PASSWORD} | sudo docker login ${ACR_NAME_LC}.azurecr.io -u ${ACR_USERNAME} --password-stdin > /dev/null 2>&1
 
                     # Descargar la imagen desde ACR
-                    sudo docker pull ${ACR_NAME}.azurecr.io/${ACR_NAME}.azurecr.io/${IMAGE_NAME}:latest
+                    sudo docker pull ${ACR_NAME_LC}.azurecr.io/${IMAGE_NAME}:latest
 
                     # Verificar si el contenedor ya está en ejecución
                     if sudo docker ps -a --format '{{.Names}}' | grep -Eq "^nginx_container\$"; then
@@ -75,7 +76,7 @@ stages:
                       sudo docker start nginx_container
                     else
                       echo "El contenedor 'nginx_container' no existe. Creándolo y ejecutándolo..."
-                      sudo docker run -d -p 80:80 --name nginx_container ${ACR_NAME}.azurecr.io/${ACR_NAME}.azurecr.io/${IMAGE_NAME}:latest
+                      sudo docker run -d -p 80:80 --name nginx_container ${ACR_NAME_LC}.azurecr.io/${IMAGE_NAME}:latest
                     fi
 
                     sudo docker ps
