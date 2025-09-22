@@ -7,7 +7,7 @@ variables:
   VM_IP_PUBLICA: '20.38.32.84'
   IMAGE_NAME: 'myapp-nginx-g13'
   ACR_NAME: 'containerRegGrupo13'
-  ACR_NAME_LC: 'containerreggroup13'
+  ACR_NAME_LC: 'containerreggrupo13'
   ACR_USERNAME: 'containerRegGrupo13'
   ACR_PASSWORD: 'LQ+Io6/VnP2uIb3E3vr1zQv9i/O4jGUqt74+gFBiOs+ACRDrCIsU'
 
